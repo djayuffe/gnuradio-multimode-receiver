@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<fuzz_profile>
+   <modulators>
+      <modulator carrier_amplitude="1" carrier_freq_hz="40000" carrier_phase_deg="0" gauss_bt="0.5" gauss_filter_width="1" index="0" modulation_type="0" name="Modulation" param_for_one="100.0" param_for_zero="0.0" sample_rate="None" samples_per_bit="100"/>
+   </modulators>
+   <decodings/>
+   <participants/>
+   <messages/>
+</fuzz_profile>

@@ -1,0 +1,16 @@
+.DS_Store
+.cache/
+__pycache__/
+*.pyc
+*.log
+*.tmp
+*.bak
+generated/
+recordings/
+captures/
+*.wav
+*.iq
+*.dat
+*.bin
+*.raw
+*.cfile
