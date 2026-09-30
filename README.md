@@ -2,7 +2,7 @@
 
 Modernized multimode SDR receiver with helper functions restored for GNU Radio validation.
 
-This public repository is split from the audited `modern-gnuradio-sdr-flows` workspace. It keeps a focused GNU Radio Companion flow family with archived originals in `flows/` and validated modern ports in `modern/`.
+This repository is split from the audited `modern-gnuradio-sdr-flows` workspace. It keeps a focused GNU Radio Companion flow family with archived originals in `flows/` and validated modern ports in `modern/`.
 
 ## Features
 
