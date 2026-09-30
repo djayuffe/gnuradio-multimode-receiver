@@ -1,40 +1,38 @@
 # Technical Audit
 
-This audit summarizes code, functions, and feature coverage for `gnuradio-multimode-receiver`.
+This audit covers the modern-only public repository `gnuradio-multimode-receiver`.
 
 ## Scope
 
-- Flowgraphs audited: 1 modern files plus archived originals in `flows/`.
-- Tools audited: `tools/audit_flows.py` and `tools/validate_grc.py`.
-- Reports regenerated locally before publication.
+- Modern flowgraphs audited: 1.
+- Outdated public XML removed from the repo.
+- Repo-local file paths used for samples/captures.
+- GNU Radio Companion validation target: 3.8.5.0.
 
-## Code and Function Review
+## Tooling Review
 
-- `tools/audit_flows.py` parses XML with `xml.etree.ElementTree`, hashes each file, lists block counts, connection counts, hardware endpoints, transmit-capable sinks, explicit file paths, duplicate block IDs, and exact duplicate payloads.
-- `tools/validate_grc.py` uses the installed GNU Radio Companion core API, not text matching, to load, rewrite, and validate each modern `.grc` file.
-- Shell examples avoid executing generated RF graphs automatically; generation and validation are separate from runtime operation.
+- `tools/audit_flows.py` parses GRC XML, hashes each file, reports block/connection counts, hardware endpoints, transmit-capable sinks, file paths, duplicate IDs, and exact duplicate payloads.
+- `tools/validate_grc.py` uses GNU Radio Companion's Python API to load, rewrite, and validate each modern `.grc`; it does not rely on ad hoc text matching.
+- Setup scripts, where present, create safe placeholder local files only. They do not run SDR hardware.
 
-## Feature Coverage
-
-- NFM, WFM, AM, USB, LSB, and digital-mode selector helper table
-- Frequency scanning helper compatibility layer
-- osmocom SDR source input
-- Audio, WAV, and file output paths
-- Original `profile.fuzz` preserved as archive data
-
-## Technical Parameters
+## Feature and Parameter Coverage
 
 | Flowgraph | Blocks | Connections | Key Parameters | Hardware/Audio Blocks | Transmit Blocks |
 | --- | ---: | ---: | --- | --- | --- |
 | `multimode.grc` | 100 | 31 | freq=150.0e6; srate=1.0e6; arate=48.0e3; bw=mbw; samp_rate=int(mh.get_good_rate(devinfo,srate)); mode=dmode | audio_sink_0 (audio_sink); osmosdr_source_0 (osmosdr_source) | - |
 
-## Known Operational Gaps
+## File Path Coverage
 
-- Runtime hardware behavior is not asserted by validation; actual SDR/audio devices must be configured locally.
-- External sample/capture files named in legacy graphs are not bundled unless present in `flows/`.
-- Transmit-capable graphs require separate RF lab controls and legal authorization.
+- `multimode.grc`: blocks_wavfile_sink_0.file=recfn; blocks_file_sink_0.file=aout; blocks_file_sink_1.file=digifn
 
-## Verification
+## Remaining Runtime Responsibilities
 
-- `VALIDATION.md` has no `Result: FAILED` entries.
+- GRC validation and `grcc` generation do not prove connected SDR/audio hardware behavior.
+- Users must configure local devices, antennas, sample files, and gains.
+- Transmit-capable graphs require RF isolation and authorization before any runtime use.
+
+## Verification Checklist
+
+- `VALIDATION.md` contains no `Result: FAILED` entries.
 - `SHA256SUMS.txt` verifies all committed files.
+- Generated Python and runtime captures remain ignored by git.

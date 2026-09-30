@@ -21,7 +21,7 @@
     </param>
     <param>
       <key>description</key>
-      <value>A multi-analog-mode receiver for UHD and RTLSDR for Linux/OSX</value>
+      <value>Modern GNU Radio Companion flowgraph validated for this repository.</value>
     </param>
     <param>
       <key>window_size</key>
